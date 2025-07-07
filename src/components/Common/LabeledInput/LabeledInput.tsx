@@ -14,8 +14,7 @@ export default function LabeledInput({ label, errorMessage, showError, comment, 
       {label && <RecevierSpan>{label}</RecevierSpan>}
       <InputWrapper>
         {children}
-        {showError && <ReceiverWarn>{errorMessage}</ReceiverWarn>}
-        {!showError && comment && comment}
+        {showError ? <ReceiverWarn>{errorMessage}</ReceiverWarn> : comment}
       </InputWrapper>
     </LabeledInputWrapper>
   );

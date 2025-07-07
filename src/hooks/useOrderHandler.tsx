@@ -23,13 +23,19 @@ export default function useOrderHandler({
 
   // 입력란이 비어있는지 확인
   const handleOrder = () => {
-    console.log("click")
-    const isValid = validateOrderForm({
-      message, setMessage,
-      sender, setSender,
-      receiverName, setReceiverName,
-      receiverPhone, setReceiverPhone,
-    })
+    const { isValid, errors } = validateOrderForm({
+      message,
+      sender,
+      receiverName,
+      receiverPhone,
+    });
+
+    // validation에 따른 판단
+    if (errors.message) setMessage(prev => ({ ...prev, check: true }));
+    if (errors.sender) setSender(prev => ({ ...prev, check: true }));
+    if (errors.receiverName) setReceiverName(prev => ({ ...prev, check: true }));
+    if (errors.receiverPhone) setReceiverPhone(prev => ({ ...prev, check: true }));
+    if (errors.receiverPhoneFormat) setReceiverPhone(prev => ({ ...prev, checkPhoneForm: true }));
 
     if (!isValid) return;
 

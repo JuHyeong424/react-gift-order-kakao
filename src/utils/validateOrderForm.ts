@@ -1,48 +1,46 @@
-import { isValidHypenPhone, isValidPhone } from '@/utils/phoneValidation.ts';
 import type { PhoneFiledState, TextFieldState } from '@/types/orderForm.ts';
+import { isValidHypenPhone, isValidPhone } from '@/utils/phoneValidation.ts';
 
-interface Props {
+interface ValidateInput {
   message: TextFieldState;
   sender: TextFieldState;
   receiverName: TextFieldState;
   receiverPhone: PhoneFiledState;
-  setMessage: React.Dispatch<React.SetStateAction<TextFieldState>>;
-  setSender: React.Dispatch<React.SetStateAction<TextFieldState>>;
-  setReceiverName: React.Dispatch<React.SetStateAction<TextFieldState>>;
-  setReceiverPhone: React.Dispatch<React.SetStateAction<PhoneFiledState>>;
+}
+
+interface ValidationResult {
+  isValid: boolean;
+  errors: {
+    message: boolean;
+    sender: boolean;
+    receiverName: boolean;
+    receiverPhone: boolean;
+    receiverPhoneFormat: boolean;
+  }
 }
 
 export const validateOrderForm =
   ({
-     message, setMessage,
-     sender, setSender,
-     receiverName, setReceiverName,
-     receiverPhone, setReceiverPhone,
-   }: Props): boolean => {
-  let valid = true;
+     message, sender, receiverName, receiverPhone
+  }: ValidateInput): ValidationResult => {
+  const errors = {
+    message: !message.text,
+    sender: !sender.text,
+    receiverName: !receiverName.text,
+    receiverPhone: !receiverPhone.text,
+    receiverPhoneFormat: false,
+  };
 
-  if (!message.text) {
-    setMessage(prev => ({ ...prev, check: true }));
-    valid = false;
+  if (
+    receiverPhone.text &&
+    !isValidPhone(receiverPhone.text) &&
+    !isValidHypenPhone(receiverPhone.text)
+  ) {
+    errors.receiverPhoneFormat = true;
   }
 
-  if (!sender.text) {
-    setSender(prev => ({ ...prev, check: true }));
-    valid = false;
-  }
+  // 조건이 모두 false여야 true가 나옴
+  const isValid = Object.values(errors).every(err => !err);
 
-  if (!receiverName.text) {
-    setReceiverName(prev => ({ ...prev, check: true }));
-    valid = false;
-  }
-
-  if (!receiverPhone.text) {
-    setReceiverPhone(prev => ({ ...prev, check: true }));
-    valid = false;
-  } else if (!isValidPhone(receiverPhone.text) && !isValidHypenPhone(receiverPhone.text)) {
-    setReceiverPhone(prev => ({ ...prev, checkPhoneForm: true }));
-    valid = false;
-  }
-
-  return valid;
-};
+  return { isValid, errors };
+}
