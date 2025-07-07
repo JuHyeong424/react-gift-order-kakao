@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const Row = styled.div`
+export const LabeledInputWrapper = styled.div`
     display: flex;
     align-items: center;
 `
@@ -10,7 +10,7 @@ export const RecevierSpan = styled.span`
     font-size: 16px;
 `
 
-export const Column = styled.div`
+export const InputWrapper = styled.div`
     flex: 1;
     display: flex;
     flex-direction: column;
