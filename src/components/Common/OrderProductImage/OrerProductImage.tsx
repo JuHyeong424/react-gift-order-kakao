@@ -1,8 +1,14 @@
-import { Item, ItemBrand, ItemImage, ItemName, ItemPrice } from '@/components/Common/OrderProductImage/OrderProductImage.style.ts';
+import {
+  ItemBrand,
+  ItemImage,
+  ItemImageWrapper,
+  ItemName,
+  ItemPrice,
+} from '@/components/Common/OrderProductImage/OrderProductImage.style.ts';
 
 export default function OrerProductImage({ image, name, brand, price }) {
   return (
-    <Item>
+    <ItemImageWrapper>
       <ItemImage>
         <img src={image} alt='사진' />
       </ItemImage>
@@ -12,6 +18,6 @@ export default function OrerProductImage({ image, name, brand, price }) {
         <ItemBrand>{brand}</ItemBrand>
         <ItemPrice><span>상품가</span> {price}원</ItemPrice>
       </div>
-    </Item>
+    </ItemImageWrapper>
   )
 }

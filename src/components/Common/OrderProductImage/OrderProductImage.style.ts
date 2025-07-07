@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const Item = styled.div`
+export const ItemImageWrapper = styled.div`
     display: flex;
     border: 1px solid ${({ theme }) => theme.colors.gray500};
     border-radius: 5px;
