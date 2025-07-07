@@ -1,11 +1,24 @@
 import { isValidHypenPhone, isValidPhone } from '@/utils/phoneValidation.ts';
+import type { PhoneFiledState, TextFieldState } from '@/types/orderForm.ts';
 
-export const validateOrderForm = ({
-                              message, setMessage,
-                              sender, setSender,
-                              receiverName, setReceiverName,
-                              receiverPhone, setReceiverPhone,
-                            }: any): boolean => {
+interface Props {
+  message: TextFieldState;
+  sender: TextFieldState;
+  receiverName: TextFieldState;
+  receiverPhone: PhoneFiledState;
+  setMessage: React.Dispatch<React.SetStateAction<TextFieldState>>;
+  setSender: React.Dispatch<React.SetStateAction<TextFieldState>>;
+  setReceiverName: React.Dispatch<React.SetStateAction<TextFieldState>>;
+  setReceiverPhone: React.Dispatch<React.SetStateAction<PhoneFiledState>>;
+}
+
+export const validateOrderForm =
+  ({
+     message, setMessage,
+     sender, setSender,
+     receiverName, setReceiverName,
+     receiverPhone, setReceiverPhone,
+   }: Props): boolean => {
   let valid = true;
 
   if (!message.text) {

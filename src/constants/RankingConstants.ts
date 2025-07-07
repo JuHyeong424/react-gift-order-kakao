@@ -5,6 +5,7 @@ export const categories = [
   { label: '청소년이', icon: '👦🏻' },
 ];
 
+export const RANKING_IN_THREE=3;
 export const INITIAL_VISIBLE_GIFT_COUNT = 6;
 
 export const TOTAL_GIFT_COUNT = 21;
