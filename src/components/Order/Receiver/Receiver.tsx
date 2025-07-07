@@ -47,7 +47,6 @@ export default function Receiver({ setCount, receiverName, setReceiverName, rece
               })
             }
           />
-
         }
         showError={receiverPhone.check || receiverPhone.checkPhoneForm}
         errorMessage={

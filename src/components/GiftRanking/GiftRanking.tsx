@@ -11,6 +11,7 @@ import SortSpan from "@/components/Common/SortOption/SortOption"
 import RankingCard from '@/components/Common/RankingCard/RankingCard';
 import useSelectedState from '@/hooks/useSelectedState.tsx';
 import { useNavigate } from 'react-router-dom';
+import { EXPANDED_LIST_STORAGE_ID } from '@/constants/storage.ts';
 
 export default function GiftRanking() {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ export default function GiftRanking() {
   };
 
   const expandedList = Array(TOTAL_GIFT_COUNT).fill(productList[0]);
-  localStorage.setItem('expandedList', JSON.stringify(expandedList));
+  localStorage.setItem(EXPANDED_LIST_STORAGE_ID, JSON.stringify(expandedList));
 
   return (
     <Section>
