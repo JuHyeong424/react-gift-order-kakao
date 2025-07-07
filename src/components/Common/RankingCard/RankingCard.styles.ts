@@ -1,10 +1,12 @@
 import styled from '@emotion/styled';
+import { RANKING_IN_THREE } from '@/constants/RankingConstants.ts';
 
 export const Card = styled.div`
     background: #fff;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    padding: 12px;
+    
+    &:hover {
+        cursor: pointer;
+    }
 `;
 
 export const ImageWrapper = styled.div`
@@ -21,8 +23,7 @@ export const RankBadge = styled.div<{ rank: number }>`
     font-size: 13px;
     font-weight: bold;
     color: ${({ theme }) => theme.colors.gray00};
-    background-color: ${({ rank, theme }) =>
-  rank <= 3 ? theme.colors.red600 : theme.colors.gray500};
+    background-color: ${({ rank }) => rank <= RANKING_IN_THREE ? '#ff3b30' : '#888'};
     display: flex;
     align-items: center;
     justify-content: center;
