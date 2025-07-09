@@ -1,7 +1,5 @@
 import {
   Title,
-  SendeInfo,
-  SenderName,
   SenderWrapper,
   SenderInput,
   SendInfo, SendError,
@@ -11,6 +9,7 @@ import { useForm } from 'react-hook-form';
 
 export type Ref = {
   triggerSenderValidation: () => Promise<boolean>;
+  getSender: () => string;
 };
 
 function Sender2Component(_: unknown, ref: React.Ref<Ref>) {
@@ -34,7 +33,8 @@ function Sender2Component(_: unknown, ref: React.Ref<Ref>) {
     triggerSenderValidation: async () => {
       setWatchValidation(true);
       return await trigger("sender");
-    }
+    },
+    getSender: () => text,
   }));
 
   const onSubmit = data => {

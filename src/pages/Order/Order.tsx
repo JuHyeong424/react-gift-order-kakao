@@ -13,6 +13,7 @@ export default function Order() {
   const [count ,setCount] = useState(0);
   const messageRef = useRef(null);
   const senderRef = useRef(null);
+  const receiverRef = useRef(null);
 
   useEffect(() => {
     // 컴포넌트가 마운트(처음 렌더링) 될 때 스크롤을 맨 위로 이동
@@ -24,9 +25,9 @@ export default function Order() {
       <Header />
       <Message2 ref={messageRef} />
       <Sender2 ref={senderRef} />
-      <Receiver2 setCount={setCount}/>
+      <Receiver2  ref={receiverRef} setCount={setCount}/>
       <ItemInfo id={id}/>
-      <OrderButton2 messageRef={messageRef} senderRef={senderRef} id={id} count={count} />
+      <OrderButton2 receiverRef={receiverRef} messageRef={messageRef} senderRef={senderRef} id={id} count={count} />
     </>
   )
 }

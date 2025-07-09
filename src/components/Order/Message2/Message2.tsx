@@ -12,6 +12,7 @@ import { useForm } from 'react-hook-form';
 
 export type Ref = {
   triggerValidation: () => Promise<boolean>;
+  getMessage: () => string;
 };
 
 function Message2Component(_: unknown, ref: React.Ref<Ref>) {
@@ -42,7 +43,8 @@ function Message2Component(_: unknown, ref: React.Ref<Ref>) {
     triggerValidation: async () => {
       setWatchValidation(true);
       return await trigger("textMessage");
-    }
+    },
+    getMessage: () => text,
   }));
 
   return (

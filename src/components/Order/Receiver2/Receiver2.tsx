@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import {
   BaseContainer,
   BlurContainer, InfoList, Input, ItemInput,
@@ -23,7 +23,11 @@ type Receiver = {
   count: number;
 }
 
-export default function Receiver2({ setCount }) {
+export type Ref = {
+  triggerReceiverValidation: () => Promise<boolean>;
+}
+
+function Receiver2Component({ setCount }, ref: React.Ref<Ref>) {
   const [modal, setModal] = useState(false);
   // 받는 사람 정보를 저장할 배열 ref
   const submittedRef = useRef<Receiver[] | null>(null);
@@ -44,6 +48,12 @@ export default function Receiver2({ setCount }) {
 
   // 현재 모든 입력 값들을 watch
   const values = watch("receiverInfo");
+
+  useImperativeHandle(ref, () => ({
+    triggerReceiverValidation: async () => {
+      return !(!submittedRef.current || submittedRef.current.length === 0);
+    }
+  }))
 
   const isSamePhoneNumber = (value: string, index: number) => {
     const allPhones = values?.map(item => item.phone);
@@ -214,3 +224,7 @@ export default function Receiver2({ setCount }) {
     </>
   )
 }
+
+const Receiver2 = forwardRef(Receiver2Component);
+export default Receiver2;
+
