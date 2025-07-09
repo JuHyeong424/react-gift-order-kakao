@@ -7,6 +7,7 @@ import OrderButton from '@/components/Order/OrderButton/OrderButton.tsx';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { orderMessage } from '@/data/orderMessage.ts';
+import Receiver2 from '@/components/Order/Receiver2/Receiver2.tsx';
 
 export default function Order() {
   const { id } = useParams();
@@ -27,7 +28,7 @@ export default function Order() {
       <Header />
       <Message message={message} setMessage={setMessage} />
       <Sender sender={sender} setSender={setSender}/>
-      <Receiver setCount={setCount} receiverName={receiverName} setReceiverName={setReceiverName} receiverPhone={receiverPhone} setReceiverPhone={setReceiverPhone} />
+      <Receiver2 setCount={setCount} receiverName={receiverName} setReceiverName={setReceiverName} receiverPhone={receiverPhone} setReceiverPhone={setReceiverPhone} />
       <ItemInfo id={id}/>
       <OrderButton id={id} count={count} message={message} setMessage={setMessage} sender={sender} setSender={setSender} receiverName={receiverName} setReceiverName={setReceiverName} receiverPhone={receiverPhone} setReceiverPhone={setReceiverPhone}/>
     </>

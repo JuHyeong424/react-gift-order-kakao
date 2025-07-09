@@ -4,12 +4,6 @@ export const SenderWrapper = styled.div`
     margin: 10px 0;
     padding: 15px 15px 20px 15px;
     background-color: ${({ theme }) => theme.colors.gray00};
-    
-    div {
-        font-size: 12px;
-        margin: 10px 20px 5px 5px;
-        color: ${({ theme }) => theme.colors.red700};
-    }
 `
 
 export const Title = styled.p`

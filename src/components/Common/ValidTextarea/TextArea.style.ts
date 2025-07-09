@@ -4,9 +4,9 @@ export const TextArea = styled.div<{ isActive: boolean }>`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 100%;
     
     textarea {
-        width: 700px;
         height: 60px;
         border: 1px solid ${({ theme, isActive }) => isActive? theme.colors.red700 : theme.colors.gray500};
         border-radius: 5px;
