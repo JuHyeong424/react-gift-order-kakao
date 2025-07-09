@@ -23,7 +23,7 @@ type Receiver = {
   count: number;
 }
 
-export default function Receiver2() {
+export default function Receiver2({ setCount }) {
   const [modal, setModal] = useState(false);
   // 받는 사람 정보를 저장할 배열 ref
   const submittedRef = useRef<Receiver[] | null>(null);
@@ -89,6 +89,13 @@ export default function Receiver2() {
       document.body.style.overflow = 'auto';
     };
   }, [modal]);
+
+  useEffect(() => {
+    if (submittedRef.current) {
+      const total = submittedRef.current.reduce((acc, cur) => acc + Number(cur.count), 0);
+      setCount(total);
+    }
+  }, [submittedRef.current]);
 
   return (
     <>
