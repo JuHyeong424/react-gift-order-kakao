@@ -45,6 +45,7 @@ function Message2Component(_: unknown, ref: React.Ref<MessageRef>) {
             onClick={() => {
               setImage(item.imageUrl);
               setValue("textMessage", item.defaultTextMessage);
+              trigger("textMessage");
             }}
           />
         ))}
