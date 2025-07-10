@@ -1,30 +1,25 @@
 import {
   Title,
   SenderWrapper,
-  SenderInput,
-  SendInfo, SendError,
 } from '@/components/Order/Sender/Sender.style.ts';
-import { forwardRef, useImperativeHandle, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { forwardRef, Ref, useImperativeHandle } from 'react';
 import type { SenderRef } from '@/types/order.ts';
+import useSenderForm from '@/hooks/useSenderForm.ts';
+import SenderForm from '@/components/Order/Sender/SenderForm.tsx';
 
 function Sender2Component(_: unknown, ref: React.Ref<SenderRef>) {
-  const [watchValidation, setWatchValidation] = useState(false);
   const {
+    watchValidation,
+    setWatchValidation,
     register,
     handleSubmit,
-    watch,
     setValue,
     trigger,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      sender: '',
-    }
-  });
+    errors,
+    text
+  } = useSenderForm();
 
-  const text = watch("sender");
-
+  // 특정 함수에 접근, forwardRef에 등록
   useImperativeHandle(ref, () => ({
     triggerSenderValidation: async () => {
       setWatchValidation(true);
@@ -41,25 +36,21 @@ function Sender2Component(_: unknown, ref: React.Ref<SenderRef>) {
     <SenderWrapper>
       <Title>보내는 사람</Title>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <SenderInput
-          {...register("sender", {
-            required: "이름을 입력해주세요."
-          })}
-          value={text}
-          onChange={(e) => {
-            setValue("sender", e.target.value);
-            if (watchValidation) trigger("sender");
-          }}
-          placeholder="이름을 입력하세요."
-          isActive={errors.sender}
-        />
-        {errors.sender ? <SendError>{errors.sender.message}</SendError> : <SendInfo>* 실제 선물 발송 시 발신자이름으로 반영되는 정보입니다.</SendInfo>}
-      </form>
+      <SenderForm
+        handleSubmit={handleSubmit}
+        onSubmit={onSubmit}
+        register={register}
+        text={text}
+        setValue={setValue}
+        watchValidation={watchValidation}
+        trigger={trigger}
+        error={errors.sender}
+      />
     </SenderWrapper>
   )
 }
 
+// 타입을 확실히 명시하고 export
+// 부모가 자식 dom에 접근
 const Sender = forwardRef<Ref>(Sender2Component);
 export default Sender;
-
