@@ -166,12 +166,12 @@ export const ItemInput = styled.div`
         color: ${({ theme }) => theme.colors.red700};
     }
 `
-export const Input = styled.input<{ hasError: boolean }>`
+export const Input = styled.input<{ isActive: boolean }>`
     width: 100%;
     height: 100%;
     padding: 13px;
-    border: 1px solid ${({ hasError, theme }) =>
-            hasError ? theme.colors.red500 : theme.colors.gray300};
+    border: 1px solid ${({ isActive, theme }) =>
+            isActive ? theme.colors.red500 : theme.colors.gray300};
     border-radius: 10px;
 
     &::placeholder {

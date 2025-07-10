@@ -6,13 +6,9 @@ import {
 } from '@/components/Order/Sender/Sender.style.ts';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import type { SenderRef } from '@/types/order.ts';
 
-export type Ref = {
-  triggerSenderValidation: () => Promise<boolean>;
-  getSender: () => string;
-};
-
-function Sender2Component(_: unknown, ref: React.Ref<Ref>) {
+function Sender2Component(_: unknown, ref: React.Ref<SenderRef>) {
   const [watchValidation, setWatchValidation] = useState(false);
   const {
     register,

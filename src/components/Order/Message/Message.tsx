@@ -9,13 +9,9 @@ import {
 import MessageImage from "@/components/Common/MessageImage/MessageImage.tsx"
 import { forwardRef, useImperativeHandle, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import type { MessageRef } from '@/types/order.ts';
 
-export type Ref = {
-  triggerValidation: () => Promise<boolean>;
-  getMessage: () => string;
-};
-
-function Message2Component(_: unknown, ref: React.Ref<Ref>) {
+function Message2Component(_: unknown, ref: React.Ref<MessageRef>) {
   const [image, setImage] = useState(orderMessage[0].imageUrl);
   const [watchValidation, setWatchValidation] = useState(false);
 

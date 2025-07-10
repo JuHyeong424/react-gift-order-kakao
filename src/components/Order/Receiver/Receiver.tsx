@@ -16,18 +16,9 @@ import {
 } from '@/components/Order/Receiver/Receiver.style.ts';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { isValidPhoneFlexible } from '@/utils/phoneValidation.ts';
+import type { ReceiverRef, Receiver } from '@/types/order.ts';
 
-type Receiver = {
-  name: string;
-  phone: string;
-  count: number;
-}
-
-export type Ref = {
-  triggerReceiverValidation: () => Promise<boolean>;
-}
-
-function Receiver2Component({ setCount }, ref: React.Ref<Ref>) {
+function Receiver2Component({ setCount }, ref: React.Ref<ReceiverRef>) {
   const [modal, setModal] = useState(false);
   // 받는 사람 정보를 저장할 배열 ref
   const submittedRef = useRef<Receiver[] | null>(null);
@@ -187,7 +178,7 @@ function Receiver2Component({ setCount }, ref: React.Ref<Ref>) {
                             return isSamePhoneNumber(value, index);
                           },
                         })}
-                        hasError={!!errors.receiverInfo?.[index]?.phone}
+                        isActive={!!errors.receiverInfo?.[index]?.phone}
                         placeholder="전화번호를 입력하세요."
                       />
                       {errors.receiverInfo?.[index]?.phone?.message &&
