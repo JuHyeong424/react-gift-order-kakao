@@ -1,39 +1,29 @@
 import { orderMessage } from '@/data/orderMessage.ts';
 import {
-  ErrorMessage,
   GifImage,
   GifWrapper,
-  ImageWrapper, TextArea,
-  Wrapper,
+  ImageWrapper,
+  Wrapper, MessageImage
 } from '@/components/Order/Message/Message.style.ts';
-import MessageImage from "@/components/Common/MessageImage/MessageImage.tsx"
-import { forwardRef, useImperativeHandle, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { forwardRef, useImperativeHandle } from 'react';
 import type { MessageRef } from '@/types/order.ts';
+import MessageInput from '@/components/Order/Message/MessageInput.tsx';
+import useMessageForm from '@/hooks/useMessageForm.ts';
 
 function Message2Component(_: unknown, ref: React.Ref<MessageRef>) {
-  const [image, setImage] = useState(orderMessage[0].imageUrl);
-  const [watchValidation, setWatchValidation] = useState(false);
-
   const {
+    image,
+    setImage,
+    watchValidation,
+    setWatchValidation,
     register,
     handleSubmit,
     trigger,
     setValue,
-    watch,
-    formState: { errors }
-  } = useForm({
-    mode: "onChange",
-    defaultValues: {
-      textMessage: orderMessage[0].defaultTextMessage,
-    }
-  });
-
-  const onSubmit = data => {
-    console.log(data);
-  };
-
-  const text = watch("textMessage");
+    text,
+    errors,
+    onSubmit,
+  } = useMessageForm();
 
   useImperativeHandle(ref, () => ({
     triggerValidation: async () => {
@@ -64,19 +54,15 @@ function Message2Component(_: unknown, ref: React.Ref<MessageRef>) {
       </GifWrapper>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <TextArea
-          {...register("textMessage", {
-            required: "메시지를 입력해주세요."
-          })}
-          value={text}
+        <MessageInput
+          register={register}
+          text={text}
           onChange={(e) => {
             setValue("textMessage", e.target.value);
             if (watchValidation) trigger("textMessage");
           }}
-          isActive={errors.textMessage}
-          placeholder="메시지를 입력해주세요."
+          error={errors.textMessage}
         />
-        {errors.textMessage && <ErrorMessage>{errors.textMessage.message}</ErrorMessage>}
       </form>
     </Wrapper>
   );
