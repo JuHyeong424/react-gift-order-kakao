@@ -5,7 +5,7 @@ import {
   GifWrapper,
   ImageWrapper, TextArea,
   Wrapper,
-} from '@/components/Order/Message2/Message2.style.ts';
+} from '@/components/Order/Message/Message.style.ts';
 import MessageImage from "@/components/Common/MessageImage/MessageImage.tsx"
 import { forwardRef, useImperativeHandle, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -87,5 +87,5 @@ function Message2Component(_: unknown, ref: React.Ref<Ref>) {
 }
 
 // 타입을 확실히 명시하고 export
-const Message2 = forwardRef<Ref>(Message2Component);
-export default Message2;
+const Message = forwardRef<Ref>(Message2Component);
+export default Message;

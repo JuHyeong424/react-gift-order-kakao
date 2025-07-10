@@ -1,12 +1,11 @@
 import ItemInfo from '@/components/Order/ItemInfo/ItemInfo.tsx';
-import Sender from '@/components/Order/Sender/Sender.tsx';
 import Header from '@/components/Header/Header.tsx';
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Receiver2 from '@/components/Order/Receiver2/Receiver2.tsx';
-import Message2 from '@/components/Order/Message2/Message2.tsx';
-import OrderButton2 from '@/components/Order/OrderButton2/OrderButton2.tsx';
-import Sender2 from '@/components/Order/Sender2/Sender2.tsx';
+import Receiver from '@/components/Order/Receiver/Receiver.tsx';
+import Message from '@/components/Order/Message/Message.tsx';
+import OrderButton from '@/components/Order/OrderButton/OrderButton.tsx';
+import Sender from '@/components/Order/Sender/Sender.tsx';
 
 export default function Order() {
   const { id } = useParams();
@@ -23,11 +22,11 @@ export default function Order() {
   return (
     <>
       <Header />
-      <Message2 ref={messageRef} />
-      <Sender2 ref={senderRef} />
-      <Receiver2  ref={receiverRef} setCount={setCount}/>
+      <Message ref={messageRef} />
+      <Sender ref={senderRef} />
+      <Receiver ref={receiverRef} setCount={setCount}/>
       <ItemInfo id={id}/>
-      <OrderButton2 receiverRef={receiverRef} messageRef={messageRef} senderRef={senderRef} id={id} count={count} />
+      <OrderButton receiverRef={receiverRef} messageRef={messageRef} senderRef={senderRef} id={id} count={count} />
     </>
   )
 }

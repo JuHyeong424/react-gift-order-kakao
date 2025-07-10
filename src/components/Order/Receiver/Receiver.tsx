@@ -13,7 +13,7 @@ import {
   ReceiverWrapper,
   RecevierTitle,
   Title_Btn,
-} from '@/components/Order/Receiver2/Receiver2.style.ts';
+} from '@/components/Order/Receiver/Receiver.style.ts';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { isValidPhoneFlexible } from '@/utils/phoneValidation.ts';
 
@@ -225,6 +225,6 @@ function Receiver2Component({ setCount }, ref: React.Ref<Ref>) {
   )
 }
 
-const Receiver2 = forwardRef(Receiver2Component);
-export default Receiver2;
+const Receiver = forwardRef(Receiver2Component);
+export default Receiver;
 

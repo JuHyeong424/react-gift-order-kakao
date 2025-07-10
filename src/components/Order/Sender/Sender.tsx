@@ -3,7 +3,7 @@ import {
   SenderWrapper,
   SenderInput,
   SendInfo, SendError,
-} from '@/components/Order/Sender2/Sender2.style.ts';
+} from '@/components/Order/Sender/Sender.style.ts';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -64,6 +64,6 @@ function Sender2Component(_: unknown, ref: React.Ref<Ref>) {
   )
 }
 
-const Sender2 = forwardRef<Ref>(Sender2Component);
-export default Sender2;
+const Sender = forwardRef<Ref>(Sender2Component);
+export default Sender;
 

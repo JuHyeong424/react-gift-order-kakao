@@ -6,7 +6,7 @@ import {
   ItemPrice,
 } from '@/components/Common/OrderProductImage/OrderProductImage.style.ts';
 
-export default function OrerProductImage({ image, name, brand, price }) {
+export default function OrderProductImage({ image, name, brand, price }) {
   return (
     <ItemImageWrapper>
       <ItemImage>
