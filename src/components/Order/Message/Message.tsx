@@ -25,10 +25,11 @@ function Message2Component(_: unknown, ref: React.Ref<MessageRef>) {
     onSubmit,
   } = useMessageForm();
 
+  // 특정 함수에 접근, forwardRef에 등록
   useImperativeHandle(ref, () => ({
     triggerValidation: async () => {
       setWatchValidation(true);
-      return await trigger("textMessage");
+      return await trigger("textMessage"); // textMessage 유효성 검사
     },
     getMessage: () => text,
   }));
@@ -69,5 +70,6 @@ function Message2Component(_: unknown, ref: React.Ref<MessageRef>) {
 }
 
 // 타입을 확실히 명시하고 export
+// 부모가 자식 dom에 접근
 const Message = forwardRef<Ref>(Message2Component);
 export default Message;

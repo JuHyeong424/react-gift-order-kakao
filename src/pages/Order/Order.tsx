@@ -10,6 +10,7 @@ import Sender from '@/components/Order/Sender/Sender.tsx';
 export default function Order() {
   const { id } = useParams();
   const [count ,setCount] = useState(0);
+  // 각 컴포넌트의 ref를 button으로 전달하여 유효성 검사 실시
   const messageRef = useRef(null);
   const senderRef = useRef(null);
   const receiverRef = useRef(null);

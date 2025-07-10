@@ -26,7 +26,7 @@ function Receiver2Component({ setCount }, ref: React.Ref<ReceiverRef>) {
     values,
   } = useReceiverForm();
 
-  // ref 제어 메서드
+  // 특정 함수에 접근, forwardRef에 등록
   useImperativeHandle(ref, () => ({
     triggerReceiverValidation: async () => {
       return !(!submittedRef.current || submittedRef.current.length === 0);
@@ -75,5 +75,7 @@ function Receiver2Component({ setCount }, ref: React.Ref<ReceiverRef>) {
   )
 }
 
+// 타입을 확실히 명시하고 export
+// 부모가 자식 dom에 접근
 const Receiver = forwardRef(Receiver2Component);
 export default Receiver;
