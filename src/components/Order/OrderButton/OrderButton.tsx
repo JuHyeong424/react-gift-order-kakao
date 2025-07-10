@@ -1,5 +1,5 @@
 import { PriceButton } from '@/components/Order/OrderButton/OrderButton.style.ts';
-import useOrderButton from '@/hooks/useOrderButton.ts';
+import useOrderButton from '@/hooks/order/useOrderButton.ts';
 
 export default function OrderButton({ props }) {
   const {

@@ -8,7 +8,7 @@ import {
 import { forwardRef, useImperativeHandle } from 'react';
 import type { MessageRef } from '@/types/order.ts';
 import MessageInput from '@/components/Order/Message/MessageInput.tsx';
-import useMessageForm from '@/hooks/useMessageForm.ts';
+import useMessageForm from '@/hooks/order/useMessageForm.ts';
 
 function Message2Component(_: unknown, ref: React.Ref<MessageRef>) {
   const {

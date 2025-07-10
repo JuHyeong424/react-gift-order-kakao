@@ -4,7 +4,7 @@ import {
 } from '@/components/Order/Sender/Sender.style.ts';
 import { forwardRef, Ref, useImperativeHandle } from 'react';
 import type { SenderRef } from '@/types/order.ts';
-import useSenderForm from '@/hooks/useSenderForm.ts';
+import useSenderForm from '@/hooks/order/useSenderForm.ts';
 import SenderForm from '@/components/Order/Sender/SenderForm.tsx';
 
 function Sender2Component(_: unknown, ref: React.Ref<SenderRef>) {
