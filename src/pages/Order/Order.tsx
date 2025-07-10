@@ -19,6 +19,14 @@ export default function Order() {
     window.scrollTo({ top: 0 });
   }, []);
 
+  const orderProps = {
+    id,
+    count,
+    messageRef,
+    senderRef,
+    receiverRef,
+  }
+
   return (
     <>
       <Header />
@@ -26,7 +34,7 @@ export default function Order() {
       <Sender ref={senderRef} />
       <Receiver ref={receiverRef} setCount={setCount}/>
       <ItemInfo id={id}/>
-      <OrderButton receiverRef={receiverRef} messageRef={messageRef} senderRef={senderRef} id={id} count={count} />
+      <OrderButton props={orderProps} />
     </>
   )
 }
