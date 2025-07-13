@@ -3,16 +3,16 @@ import {
   ReceiverInfo,
   ReceiverTable, ReceiverWrapper,
   RecevierTitle,
-  Title_Btn,
+  TitleButton,
 } from '@/components/Order/Receiver/Receiver.style.ts';
 
 export default function ReceiverCurrentState({ openModal, submittedRef }) {
   return (
     <ReceiverWrapper>
-      <Title_Btn>
+      <TitleButton>
         <RecevierTitle>받는 사람</RecevierTitle>
         <ReceiverAddBtn onClick={openModal}>추가</ReceiverAddBtn>
-      </Title_Btn>
+      </TitleButton>
 
       {submittedRef && submittedRef.length > 0 ? (
         <ReceiverTable>

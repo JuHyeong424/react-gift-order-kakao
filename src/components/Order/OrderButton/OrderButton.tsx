@@ -1,11 +1,9 @@
 import { PriceButton } from '@/components/Order/OrderButton/OrderButton.style.ts';
-import useOrderButton from '@/hooks/order/useOrderButton.ts';
 import { useFormContext } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { EXPANDED_LIST_STORAGE_ID } from '@/constants/storage.ts';
 import { renderOrderSuccessToast } from '@/utils/toastContents.tsx';
 import { toast } from 'react-toastify';
-import useReceiverForm from '@/hooks/order/receiver/useReceiverForm.ts';
 
 export default function OrderButton({ id, count, receiverForm }) {
   const { handleSubmit } = useFormContext();

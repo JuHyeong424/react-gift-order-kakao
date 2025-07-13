@@ -10,7 +10,7 @@ export default function OrderProductImage({ image, name, brand, price }) {
   return (
     <ItemImageWrapper>
       <ItemImage>
-        <img src={image} alt='사진' />
+        <img src={image} alt={image.name} />
       </ItemImage>
 
       <div>

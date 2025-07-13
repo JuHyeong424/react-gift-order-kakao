@@ -1,4 +1,3 @@
-
 import {
   InfoList,
   ModalBottomBtn,
@@ -43,10 +42,11 @@ export default function ReceiverFormList(
             name={`receiverInfo.${index}.phone`}
             placeholder="전화번호를 입력하세요."
             register={register}
-            validate={value => {
-              const formatValid = isValidPhoneFlexible(value);
-              if (!formatValid) return '전화번호 형식이 올바르지 않습니다';
-              return isSamePhoneNumber(value, index);
+            rules={{
+              validate: {
+                format: value => isValidPhoneFlexible(value) || '전화번호 형식이 올바르지 않습니다',
+                duplicate: value => isSamePhoneNumber(value, index),
+              }
             }}
             error={errors?.receiverInfo?.[index]?.phone}
           />
@@ -56,9 +56,14 @@ export default function ReceiverFormList(
             label="수량"
             name={`receiverInfo.${index}.count`}
             register={register}
-            validate={value => value > 0 || '구매 수량은 1개 이상이어야 해요.'}
+            rules={{
+              validate: {
+                positive: value => value > 0 || '구매 수량은 1개 이상이어야 해요.',
+              }
+            }}
             error={errors?.receiverInfo?.[index]?.count}
           />
+
         </InfoList>
       ))}
 

@@ -1,10 +1,8 @@
-import { forwardRef, useEffect, useImperativeHandle } from 'react';
-import type { ReceiverRef, Receiver } from '@/types/order.ts';
+import { useEffect } from 'react';
 import ReceiverCurrentState from '@/components/Order/Receiver/ReceiverCurrentState.tsx';
 import ReceiverModal from '@/components/Order/Receiver/ReceiverModal.tsx';
 import { addHandler, cancleHandler, openModalHandler, submitHandler } from '@/hooks/order/receiver/useReceiverHandlers.ts';
 import useReceiverModalControl from '@/hooks/order/receiver/useReceiverModalControl.ts';
-import useReceiverForm from '@/hooks/order/receiver/useReceiverForm.ts';
 import useReceiverValidation from '@/hooks/order/receiver/useReceiverValidation.ts';
 
 export default function Receiver({ setCount, receiverForm }) {
