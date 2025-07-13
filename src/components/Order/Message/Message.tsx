@@ -3,74 +3,54 @@ import {
   GifImage,
   GifWrapper,
   ImageWrapper,
-  Wrapper, MessageImage
+  Wrapper,
+  MessageImage,
 } from '@/components/Order/Message/Message.style.ts';
-import { forwardRef, useImperativeHandle } from 'react';
-import type { MessageRef } from '@/types/order.ts';
 import MessageInput from '@/components/Order/Message/MessageInput.tsx';
-import useMessageForm from '@/hooks/order/useMessageForm.ts';
+import { useEffect, useState } from 'react';
+import { Controller, useFormContext } from 'react-hook-form';
 
-function Message2Component(_: unknown, ref: React.Ref<MessageRef>) {
-  const {
-    image,
-    setImage,
-    watchValidation,
-    setWatchValidation,
-    register,
-    handleSubmit,
-    trigger,
-    setValue,
-    text,
-    errors,
-    onSubmit,
-  } = useMessageForm();
+export default function Message() {
+  const { control, setValue, trigger, formState: { errors } } = useFormContext();
+  const [image, setImage] = useState(orderMessage[0].imageUrl);
 
-  // 특정 함수에 접근, forwardRef에 등록
-  useImperativeHandle(ref, () => ({
-    triggerValidation: async () => {
-      setWatchValidation(true);
-      return await trigger("textMessage"); // textMessage 유효성 검사
-    },
-    getMessage: () => text,
-  }));
+  useEffect(() => {
+    setValue('textMessage', orderMessage[0].defaultTextMessage)
+  }, [setValue]);
 
   return (
     <Wrapper>
       <ImageWrapper>
-        {orderMessage.map(item => (
+        {orderMessage.map((item) => (
           <MessageImage
             key={item.id}
             src={item.thumbUrl}
             alt={item.defaultTextMessage}
             onClick={() => {
               setImage(item.imageUrl);
-              setValue("textMessage", item.defaultTextMessage);
-              trigger("textMessage");
+              setValue('textMessage', item.defaultTextMessage);
+              trigger('textMessage');
             }}
           />
         ))}
       </ImageWrapper>
 
       <GifWrapper>
-        <GifImage src={image} alt={image} />
+        <GifImage src={image} alt="선택된 메시지 이미지" />
       </GifWrapper>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <MessageInput
-          register={register}
-          text={text}
-          onChange={(e) => {
-            setValue("textMessage", e.target.value);
-            if (watchValidation) trigger("textMessage");
-          }}
-          error={errors.textMessage}
-        />
-      </form>
+      <Controller
+        name="textMessage"
+        control={control}
+        rules={{ required: '메시지를 입력해주세요.' }}
+        render={({ field }) => (
+          <MessageInput
+            value={field.value}
+            onChange={field.onChange}
+            error={errors.textMessage}
+          />
+        )}
+      />
     </Wrapper>
   );
 }
-
-// 타입을 확실히 명시하고 export
-// 부모가 자식 dom에 접근
-const Message = forwardRef<Ref>(Message2Component);
-export default Message;

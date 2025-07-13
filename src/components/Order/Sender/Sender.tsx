@@ -6,51 +6,43 @@ import { forwardRef, Ref, useImperativeHandle } from 'react';
 import type { SenderRef } from '@/types/order.ts';
 import useSenderForm from '@/hooks/order/useSenderForm.ts';
 import SenderForm from '@/components/Order/Sender/SenderForm.tsx';
+import { Controller, useFormContext } from 'react-hook-form';
 
-function Sender2Component(_: unknown, ref: React.Ref<SenderRef>) {
+export default function Sender() {
   const {
-    watchValidation,
-    setWatchValidation,
-    register,
-    handleSubmit,
+    control,
     setValue,
     trigger,
-    errors,
-    text
-  } = useSenderForm();
-
-  // 특정 함수에 접근, forwardRef에 등록
-  useImperativeHandle(ref, () => ({
-    triggerSenderValidation: async () => {
-      setWatchValidation(true);
-      return await trigger("sender");
-    },
-    getSender: () => text,
-  }));
-
-  const onSubmit = data => {
-    console.log(data);
-  }
+    formState: { errors },
+  } = useFormContext();
 
   return (
     <SenderWrapper>
       <Title>보내는 사람</Title>
 
-      <SenderForm
-        handleSubmit={handleSubmit}
-        onSubmit={onSubmit}
-        register={register}
-        text={text}
-        setValue={setValue}
-        watchValidation={watchValidation}
-        trigger={trigger}
-        error={errors.sender}
+      <Controller
+        name="senderName"
+        control={control}
+        rules={{ required: '메시지를 입력해주세요.' }}
+        render={({ field }) => (
+          <SenderForm
+            value={field.value}
+            onChange={field.onChange}
+            error={errors.senderName}
+          />
+        )}
       />
+      {/*<SenderForm*/}
+      {/*  handleSubmit={handleSubmit}*/}
+      {/*  onSubmit={onSubmit}*/}
+      {/*  register={register}*/}
+      {/*  text={text}*/}
+      {/*  setValue={setValue}*/}
+      {/*  watchValidation={watchValidation}*/}
+      {/*  trigger={trigger}*/}
+      {/*  error={errors.sender}*/}
+      {/*/>*/}
     </SenderWrapper>
   )
 }
 
-// 타입을 확실히 명시하고 export
-// 부모가 자식 dom에 접근
-const Sender = forwardRef<Ref>(Sender2Component);
-export default Sender;

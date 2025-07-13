@@ -7,7 +7,7 @@ import useReceiverModalControl from '@/hooks/order/receiver/useReceiverModalCont
 import useReceiverForm from '@/hooks/order/receiver/useReceiverForm.ts';
 import useReceiverValidation from '@/hooks/order/receiver/useReceiverValidation.ts';
 
-function Receiver2Component({ setCount }, ref: React.Ref<ReceiverRef>) {
+export default function Receiver({ setCount, receiverForm }) {
   // 모달 상태 제어
   const { modal, setModal } = useReceiverModalControl();
 
@@ -24,14 +24,7 @@ function Receiver2Component({ setCount }, ref: React.Ref<ReceiverRef>) {
     submittedRef,
     beforeRef,
     values,
-  } = useReceiverForm();
-
-  // 특정 함수에 접근, forwardRef에 등록
-  useImperativeHandle(ref, () => ({
-    triggerReceiverValidation: async () => {
-      return !(!submittedRef.current || submittedRef.current.length === 0);
-    }
-  }))
+  } = receiverForm;
 
   // 번호 타당성 검사
   const { isSamePhoneNumber } = useReceiverValidation(values);
@@ -74,8 +67,3 @@ function Receiver2Component({ setCount }, ref: React.Ref<ReceiverRef>) {
     </>
   )
 }
-
-// 타입을 확실히 명시하고 export
-// 부모가 자식 dom에 접근
-const Receiver = forwardRef(Receiver2Component);
-export default Receiver;

@@ -42,5 +42,5 @@ export default function useReceiverForm() {
     values,
     submittedRef,
     beforeRef,
-  }
+  };
 }
