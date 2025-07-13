@@ -6,7 +6,7 @@ export const ReceiverWrapper = styled.div`
     background-color: ${({ theme }) => theme.colors.gray00};
 `
 
-export const Title_Btn = styled.div`
+export const TitleButton = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
