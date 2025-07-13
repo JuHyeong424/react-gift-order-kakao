@@ -6,36 +6,41 @@ import Receiver from '@/components/Order/Receiver/Receiver.tsx';
 import Message from '@/components/Order/Message/Message.tsx';
 import OrderButton from '@/components/Order/OrderButton/OrderButton.tsx';
 import Sender from '@/components/Order/Sender/Sender.tsx';
+import { FormProvider, useForm } from 'react-hook-form';
+import useReceiverForm from '@/hooks/order/receiver/useReceiverForm.ts';
 
 export default function Order() {
   const { id } = useParams();
   const [count ,setCount] = useState(0);
-  // 각 컴포넌트의 ref를 button으로 전달하여 유효성 검사 실시
-  const messageRef = useRef(null);
-  const senderRef = useRef(null);
-  const receiverRef = useRef(null);
+  const receiverForm = useReceiverForm();
 
   useEffect(() => {
     // 컴포넌트가 마운트(처음 렌더링) 될 때 스크롤을 맨 위로 이동
     window.scrollTo({ top: 0 });
   }, []);
 
-  const orderProps = {
-    id,
-    count,
-    messageRef,
-    senderRef,
-    receiverRef,
-  }
+  const methods = useForm({
+    mode: 'onChange',
+    defaultValues: {
+      textMessage: '',
+      senderName: '',
+      receiverName: '',
+      receiverPhone: '',
+    }
+  })
 
   return (
     <>
       <Header />
-      <Message ref={messageRef} />
-      <Sender ref={senderRef} />
-      <Receiver ref={receiverRef} setCount={setCount}/>
-      <ItemInfo id={id}/>
-      <OrderButton props={orderProps} />
+      <FormProvider {...methods}>
+        <>
+          <Message  />
+          <Sender  />
+          <Receiver setCount={setCount} receiverForm={receiverForm}/>
+          <ItemInfo id={id}/>
+          <OrderButton id={id} count={count} receiverForm={receiverForm}/>
+        </>
+      </FormProvider>
     </>
   )
 }

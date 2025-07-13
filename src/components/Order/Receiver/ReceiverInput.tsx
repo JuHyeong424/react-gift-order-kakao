@@ -1,3 +1,4 @@
+
 import { Input, ItemInput, ReceiverItem } from '@/components/Order/Receiver/Receiver.style.ts';
 
 export default function ReceiverInput({ type, label, name, placeholder,  register, validate, error }) {
